@@ -15,7 +15,7 @@ public:
 	{
 		tokens.clear();
 	}
-	
+
 	~Tokenizer()
 	{
 		tokens.clear();
@@ -65,7 +65,7 @@ public:
 		int current = 0;
 
 		// Go through the input one character at a time
-		while (current < (int) input.length())
+		while (current < (int)input.length())
 		{
 			// Counts the number of characters read from the input
 			int consumedCharacters = 1;
@@ -118,10 +118,10 @@ public:
 
 private:
 	// Generic function that tokenizes a single character
-	Token* TokenizeCharacter(TokenType type, std::string value, std::string const& input, int current)
+	Token * TokenizeCharacter(TokenType type, std::string value, std::string const& input, int current)
 	{
 		// If the input matches the value
-		if (input.substr(current,1) == value)
+		if (input.substr(current, 1) == value)
 		{
 			// Create a token to return
 			Token* tok = new Token(type, value);
@@ -167,7 +167,7 @@ private:
 
 				// Increment the count
 				consumedCharacters++;
-				
+
 				// Get the next character in the input to test
 				character = input.substr(current + consumedCharacters, 1);
 			}
@@ -206,7 +206,7 @@ private:
 			std::string tokenValue = "";
 
 			// Loop until end of string is found
-			while(character != '"')
+			while (character != '"')
 			{
 				// If there is no end of the string
 				if (character == input.back())
@@ -221,7 +221,7 @@ private:
 				consumedCharacters++;
 				character = input[current + consumedCharacters];
 			}
-			
+
 			// Create a token to return
 			Token* tok = new Token(TokenType::STRING, tokenValue);
 			return tok;

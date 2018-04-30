@@ -40,7 +40,7 @@ public:
 	}
 
 public:
-	Node* root;
+	Node * root;
 };
 
 #endif

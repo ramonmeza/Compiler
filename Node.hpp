@@ -39,7 +39,7 @@ public:
 public:
 	NodeType type;
 	std::string value;
-	
+
 	Node* left;
 	Node* right;
 };

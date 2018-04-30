@@ -10,7 +10,7 @@ int main(int argc, char* argv[])
 	string code = "(add 2 (subtract \"345\" 6))";
 
 	t.Tokenize(code);
-	
+
 	cout << t;
 
 	system("PAUSE");
