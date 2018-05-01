@@ -4,26 +4,27 @@
 
 #include <string>
 
-enum TokenType
-{
-	NIL,
-	PAREN,
-	NUM,
-	NAME,
-	STRING
-};
-
 class Token
 {
+public:
+	enum Type
+	{
+		NIL,
+		PAREN,
+		NUM,
+		NAME,
+		STRING
+	};
+
 public:
 	Token()
 	{
 		length = 0;
-		type = TokenType::NIL;
+		type = Token::Type::NIL;
 		value = nullptr;
 	}
 
-	Token(TokenType _type, std::string _value)
+	Token(Token::Type _type, std::string _value)
 	{
 		length = _value.length();
 		type = _type;
@@ -37,7 +38,7 @@ public:
 public:
 	// Properties
 	int length;
-	TokenType type;
+	Token::Type type;
 	std::string value;
 };
 
