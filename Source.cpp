@@ -1,22 +1,16 @@
 #include <iostream>
 
-#include "Tokenizer.hpp"
-#include "Parser.hpp"
-#include "Emitter.hpp"
+#include "Compiler.hpp"
 
 using namespace std;
 
 int main(int argc, char* argv[])
 {
-	string code = "(print \"Hello\" 2)(add 2 (subtract 4 2))";
+	string code = "(add 1 2 (mult 3 4))";
 
-	Tokenizer t;
-	Parser p;
-	Emitter e;
+	Compiler compiler;
 
-	t.Tokenize(code);
-	p.ParseProgram(t.tokens);
-	cout << e.Emit(p.AST) << endl;
+	cout << compiler.Compile(code) << endl;
 
 	system("PAUSE");
 
