@@ -44,7 +44,7 @@ public:
 	{
 		os << "Object {" << std::endl;
 		os << "\ttype: ";
-		
+
 		switch (n.type)
 		{
 		case Node::Type::PROGRAM:

@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+
 #include "Token.hpp"
 
 class Tokenizer
@@ -13,12 +14,11 @@ class Tokenizer
 public:
 	Tokenizer()
 	{
-		tokens.clear();
 	}
 
 	~Tokenizer()
 	{
-		tokens.clear();
+		ClearTokens();
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Tokenizer& t)
@@ -59,8 +59,25 @@ public:
 		return os;
 	}
 
+	void ClearTokens()
+	{
+		if (!tokens.empty())
+		{
+			for (auto itr = tokens.begin(); itr != tokens.end(); itr++)
+			{
+				delete (*itr);
+				(*itr) = nullptr;
+			}
+
+			tokens.clear();
+		}
+	}
+
 	void Tokenize(std::string const& input)
 	{
+		// Clear the tokens
+		ClearTokens();
+
 		// Keep track of where we are in the input
 		int current = 0;
 

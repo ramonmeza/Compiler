@@ -1,6 +1,8 @@
 #include <iostream>
+
 #include "Tokenizer.hpp"
 #include "Parser.hpp"
+#include "Emitter.hpp"
 
 using namespace std;
 
@@ -10,11 +12,11 @@ int main(int argc, char* argv[])
 
 	Tokenizer t;
 	Parser p;
-	
+	Emitter e;
+
 	t.Tokenize(code);
 	p.ParseProgram(t.tokens);
-
-	cout << p << endl;
+	cout << e.Emit(p.AST) << endl;
 
 	system("PAUSE");
 

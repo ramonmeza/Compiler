@@ -17,6 +17,7 @@ public:
 
 	~Parser()
 	{
+		ClearAST();
 	}
 
 	friend std::ostream& operator<<(std::ostream& os, const Parser& p)
@@ -29,8 +30,26 @@ public:
 		return os;
 	}
 
+	void ClearAST()
+	{
+		if (AST != nullptr)
+		{
+			for (auto itr = AST->children.begin(); itr != AST->children.end(); itr++)
+			{
+				delete (*itr);
+				(*itr) = nullptr;
+			}
+
+			delete AST;
+			AST = nullptr;
+		}
+	}
+
 	void ParseProgram(std::vector<Token*>& tokens)
 	{
+		// Clear AST
+		ClearAST();
+
 		// Keep track of our place in the tokens
 		int current = 0;
 
@@ -40,7 +59,7 @@ public:
 		// Create a node pointer for adding to our AST
 		Node* node = nullptr;
 
-		while (current < (int) tokens.size())
+		while (current < (int)tokens.size())
 		{
 			node = ParseToken(tokens, &current);
 			AST->children.push_back(node);
@@ -117,7 +136,7 @@ public:
 	}
 
 public:
-	Node* AST;
+	Node * AST;
 };
 
 #endif
