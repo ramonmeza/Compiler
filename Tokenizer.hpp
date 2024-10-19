@@ -1,6 +1,5 @@
 #ifndef TOKENIZER_HPP
 #define TOKENIZER_HPP
-#pragma once
 
 #include <regex>
 #include <stdexcept>

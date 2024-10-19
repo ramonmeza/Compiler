@@ -1,6 +1,5 @@
 #ifndef COMPILER_HPP
 #define COMPILER_HPP
-#pragma once
 
 #include <string>
 

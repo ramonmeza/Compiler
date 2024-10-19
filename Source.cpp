@@ -1,18 +1,15 @@
 #include <iostream>
+#include <string>
 
 #include "Compiler.hpp"
 
-using namespace std;
-
-int main(int argc, char* argv[])
+int main(int argc, char *argv[])
 {
-	string code = "(add 1 2 (mult 3 4))";
+	const std::string code = "(add 1 2 (mult 3 4))";
 
 	Compiler compiler;
 
-	cout << compiler.Compile(code) << endl;
-
-	system("PAUSE");
+	std::cout << code << " = " << compiler.Compile(code) << std::endl;
 
 	return 0;
 }

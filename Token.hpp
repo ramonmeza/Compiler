@@ -1,6 +1,5 @@
 #ifndef TOKEN_HPP
 #define TOKEN_HPP
-#pragma once
 
 #include <string>
 

@@ -1,6 +1,5 @@
 #ifndef PARSER_HPP
 #define PARSER_HPP
-#pragma once
 
 #include <string>
 #include <vector>
@@ -11,7 +10,7 @@
 class Parser
 {
 public:
-	Parser()
+	Parser() : AST(nullptr)
 	{
 	}
 
@@ -20,7 +19,7 @@ public:
 		ClearAST();
 	}
 
-	friend std::ostream& operator<<(std::ostream& os, const Parser& p)
+	friend std::ostream &operator<<(std::ostream &os, const Parser &p)
 	{
 		if (p.AST != nullptr)
 		{
@@ -32,20 +31,11 @@ public:
 
 	void ClearAST()
 	{
-		if (AST != nullptr)
-		{
-			for (auto itr = AST->children.begin(); itr != AST->children.end(); itr++)
-			{
-				delete (*itr);
-				(*itr) = nullptr;
-			}
-
-			delete AST;
-			AST = nullptr;
-		}
+		delete AST;
+		AST = nullptr;
 	}
 
-	void ParseProgram(std::vector<Token*>& tokens)
+	void ParseProgram(std::vector<Token *> &tokens)
 	{
 		// Clear AST
 		ClearAST();
@@ -57,7 +47,7 @@ public:
 		AST = new Node(Node::Type::PROGRAM, "program");
 
 		// Create a node pointer for adding to our AST
-		Node* node = nullptr;
+		Node *node = nullptr;
 
 		while (current < (int)tokens.size())
 		{
@@ -67,10 +57,10 @@ public:
 	}
 
 	// Parse a token
-	Node* ParseToken(std::vector<Token*>& tokens, int* current)
+	Node *ParseToken(std::vector<Token *> &tokens, int *current)
 	{
 		// Get the current token
-		Token* token = tokens[(*current)];
+		Token *token = tokens[(*current)];
 
 		// Parse the token based on it's type
 		if (token->type == Token::Type::NUM)
@@ -85,10 +75,10 @@ public:
 	}
 
 	// Parses a number
-	Node* ParseNumber(std::vector<Token*>& tokens, int* current)
+	Node *ParseNumber(std::vector<Token *> &tokens, int *current)
 	{
 		// Create a node to return
-		Node* node = new Node(Node::Type::NUMBERLITERAL, tokens[(*current)]->value);
+		Node *node = new Node(Node::Type::NUMBERLITERAL, tokens[(*current)]->value);
 
 		// Increase current
 		(*current) += 1;
@@ -97,10 +87,10 @@ public:
 	}
 
 	// Parses a string
-	Node* ParseString(std::vector<Token*>& tokens, int* current)
+	Node *ParseString(std::vector<Token *> &tokens, int *current)
 	{
 		// Create a node to return
-		Node* node = new Node(Node::Type::STRINGLITERAL, tokens[(*current)]->value);
+		Node *node = new Node(Node::Type::STRINGLITERAL, tokens[(*current)]->value);
 
 		// Increase current
 		(*current) += 1;
@@ -109,13 +99,13 @@ public:
 	}
 
 	// Parses an expression
-	Node* ParseExpression(std::vector<Token*>& tokens, int* current)
+	Node *ParseExpression(std::vector<Token *> &tokens, int *current)
 	{
 		// Skip the first token, which is the opening parenthesis
-		Token* token = tokens[++(*current)];
+		Token *token = tokens[++(*current)];
 
 		// Create a node to return
-		Node* node = new Node(Node::Type::CALLEXPRESSION, token->value);
+		Node *node = new Node(Node::Type::CALLEXPRESSION, token->value);
 
 		// Get the next token (after the expression name)
 		token = tokens[++(*current)];
@@ -136,7 +126,7 @@ public:
 	}
 
 public:
-	Node * AST;
+	Node *AST;
 };
 
 #endif

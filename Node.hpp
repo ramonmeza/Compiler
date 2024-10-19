@@ -1,7 +1,7 @@
 #ifndef NODE_HPP
 #define NODE_HPP
-#pragma once
 
+#include <ostream>
 #include <string>
 #include <vector>
 
@@ -31,10 +31,10 @@ public:
 
 	~Node()
 	{
-		for (auto itr = children.begin(); itr != children.end(); itr++)
+		auto  itr = children.begin();
+		while (itr != children.end())
 		{
-			delete (*itr);
-			(*itr) = nullptr;
+			itr = children.erase(itr);
 		}
 
 		children.clear();
@@ -42,37 +42,36 @@ public:
 
 	friend std::ostream& operator<<(std::ostream& os, const Node& n)
 	{
-		os << "Object {" << std::endl;
-		os << "\ttype: ";
+		os << "Object {\n\ttype: ";
 
 		switch (n.type)
 		{
 		case Node::Type::PROGRAM:
-			os << "PROGRAM" << std::endl;
+			os << "PROGRAM" << "\n";
 			break;
 		case Node::Type::NUMBERLITERAL:
-			os << "NUMBERLITERAL" << std::endl;
+			os << "NUMBERLITERAL" << "\n";
 			break;
 		case Node::Type::STRINGLITERAL:
-			os << "STRINGLITERAL" << std::endl;
+			os << "STRINGLITERAL" << "\n";
 			break;
 		case Node::Type::CALLEXPRESSION:
-			os << "CALLEXPRESSION" << std::endl;
+			os << "CALLEXPRESSION" << "\n";
 			break;
 		default:
 			break;
 		}
 
-		os << "\tvalue: " << n.value << std::endl;
+		os << "\tvalue: " << n.value << "\n";
 
-		os << "\tchildren:" << std::endl;
+		os << "\tchildren:" << "\n";
 
 		for (auto itr = n.children.begin(); itr != n.children.end(); itr++)
 		{
 			os << *(*itr);
 		}
 
-		os << "}" << std::endl;
+		os << "}" << "\n";
 
 		return os;
 	}
